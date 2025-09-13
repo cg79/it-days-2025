@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>ef_implementation</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ef-base-repository\ef-base-repository.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.1.66" />
+      <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+      <PackageReference Include="Dapper.SimpleCRUD" Version="2.3.0" />
+      <PackageReference Include="Dapper.SqlBuilder" Version="2.1.66" />
+      <PackageReference Include="DapperExtensions" Version="1.7.0" />
+      <PackageReference Include="Dommel" Version="3.4.0" />
+      <PackageReference Include="linq2db" Version="5.4.1" />
+      <PackageReference Include="linq2db.MySql" Version="5.4.1" />
+      <PackageReference Include="linq2db.t4models" Version="5.4.1" />
+      <PackageReference Include="MySql.Data" Version="9.4.0" />
+      <PackageReference Include="RepoDb" Version="1.13.1" />
+      <PackageReference Include="RepoDb.MySql" Version="1.13.1" />
+      <PackageReference Include="RepoDb.MySqlConnector" Version="1.13.1" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>ef_base_repository</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ef-dapper-models\ef-dapper-models.csproj" />
+    </ItemGroup>
+
+</Project>
