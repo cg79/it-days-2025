@@ -2,14 +2,17 @@ using System.Data.Common;
 using ef_dapper_models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace ef_base_repository;
 public interface IEFDataContext
 {
     DbSet<T> Set<T>() where T : class, IRootEntity;
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-    // DatabaseFacade Database { get; }
-    DbConnection GetDbConnection(); // just the signature
+    DbConnection GetDbConnection(); 
     string ConnectionString { get; set; }
-    EntityEntry<T> EntryVal<T>(T entityEntryEntity) where T : class, IRootEntity;
+    DatabaseFacade Database { get; }
+    EntityEntry Entry(object entity);
+    ChangeTracker ChangeTracker { get; }
+
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

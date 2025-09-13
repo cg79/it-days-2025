@@ -3,185 +3,175 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using LinqToDB.Reflection;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace ef_base_repository
 {
-    public class DataContext : DbContext, IEFDataContext
-    {
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public  DbSet<User> Users { get; set; }
-        public  DbSet<Product> Products { get; set; }
-        public  DbSet<Invoice> Invoices { get; set; }
-        public  DbSet<InvoiceLine> InvoiceLines { get; set; }
-        public  DbSet<TimeBill> TimeBills { get; set; }
-        public  DbSet<Payment> Payments { get; set; }
-        
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     base.OnModelCreating(modelBuilder);
-        //
-        //     // One-to-one: Invoice -> Payment
-        //     modelBuilder.Entity<Invoice>()
-        //         .HasOne(i => i.Payment)
-        //         .WithOne(p => p.Invoice)
-        //         .HasForeignKey<Payment>(p => p.InvoiceId);
-        //
-        //     // One-to-many: User -> Invoices
-        //     modelBuilder.Entity<User>()
-        //         .HasMany(u => u.Invoices)
-        //         .WithOne(i => i.User)
-        //         .HasForeignKey(i => i.UserId);
-        // }
+      public class DataContext : DbContext, IEFDataContext
+      {
+            public DataContext(DbContextOptions<DataContext> options) : base(options)
+            {
+            }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-              Console.WriteLine("OOOn model creating");
-              base.OnModelCreating(modelBuilder);
+            public DbSet<User> Users { get; set; }
+            public DbSet<Product> Products { get; set; }
+            public DbSet<Invoice> Invoices { get; set; }
+            public DbSet<InvoiceLine> InvoiceLines { get; set; }
+            public DbSet<TimeBill> TimeBills { get; set; }
+            public DbSet<Payment> Payments { get; set; }
 
-              // -------------------------
-              // User
-              // -------------------------
-              modelBuilder.Entity<User>(entity =>
-              {
-                    entity.ToTable("Users");
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                  Console.WriteLine("OOOn model creating");
+                  base.OnModelCreating(modelBuilder);
 
-                    entity.HasKey(u => u.Id);
+                  // -------------------------
+                  // User
+                  // -------------------------
+                  modelBuilder.Entity<User>(entity =>
+                  {
+                        entity.ToTable("Users");
 
-                    entity.Property(u => u.FirstName)
-                          .HasMaxLength(100);
+                        entity.HasKey(u => u.Id);
 
-                    entity.Property(u => u.LastName)
-                          .HasMaxLength(100);
+                        entity.Property(u => u.FirstName)
+                              .HasMaxLength(100);
 
-                    entity.Property(u => u.Email)
-                          .IsRequired()
-                          .HasMaxLength(200);
+                        entity.Property(u => u.LastName)
+                              .HasMaxLength(100);
 
-                    entity.Property(u => u.PhoneNumber)
-                          .HasMaxLength(30);
+                        entity.Property(u => u.Email)
+                              .IsRequired()
+                              .HasMaxLength(200);
 
-                    entity.Property(u => u.Guid)
-                          .HasMaxLength(36);
+                        entity.Property(u => u.PhoneNumber)
+                              .HasMaxLength(30);
 
-                    // One-to-Many: User -> Invoices
-                    entity.HasMany(u => u.Invoices)
-                          .WithOne(i => i.User)
-                          .HasForeignKey(i => i.UserId)
-                          .OnDelete(DeleteBehavior.Cascade);
-              });
+                        entity.Property(u => u.Guid)
+                              .HasMaxLength(36);
 
-              // -------------------------
-              // Invoice
-              // -------------------------
-              modelBuilder.Entity<Invoice>(entity =>
-              {
-                    entity.ToTable("Invoices");
+                        // One-to-Many: User -> Invoices
+                        entity.HasMany(u => u.Invoices)
+                              .WithOne(i => i.User)
+                              .HasForeignKey(i => i.UserId)
+                              .OnDelete(DeleteBehavior.Cascade);
+                  });
 
-                    entity.HasKey(i => i.Id);
+                  // -------------------------
+                  // Invoice
+                  // -------------------------
+                  modelBuilder.Entity<Invoice>(entity =>
+                  {
+                        entity.ToTable("Invoices");
 
-                    entity.Property(i => i.InvoiceDate)
-                          .IsRequired();
+                        entity.HasKey(i => i.Id);
 
-                    entity.Property(i => i.Status)
-                          .IsRequired()
-                          .HasMaxLength(50);
+                        entity.Property(i => i.InvoiceDate)
+                              .IsRequired();
 
-                    entity.Property(i => i.TotalAmount)
-                          .HasColumnType("decimal(18,2)");
+                        entity.Property(i => i.Status)
+                              .IsRequired()
+                              .HasMaxLength(50);
 
-                    // One-to-Many: Invoice -> InvoiceLines
-                    entity.HasMany(i => i.InvoiceLines)
-                          .WithOne(l => l.Invoice)
-                          .HasForeignKey(l => l.InvoiceId)
-                          .OnDelete(DeleteBehavior.Cascade);
+                        entity.Property(i => i.TotalAmount)
+                              .HasColumnType("decimal(18,2)");
 
-                    // One-to-Many: Invoice -> TimeBills
-                    entity.HasMany(i => i.TimeBills)
-                          .WithOne(tb => tb.Invoice)
-                          .HasForeignKey(tb => tb.InvoiceId)
-                          .OnDelete(DeleteBehavior.Cascade);
+                        // One-to-Many: Invoice -> InvoiceLines
+                        entity.HasMany(i => i.InvoiceLines)
+                              .WithOne(l => l.Invoice)
+                              .HasForeignKey(l => l.InvoiceId)
+                              .OnDelete(DeleteBehavior.Cascade);
 
-                    // One-to-One: Invoice -> Payment
-                    entity.HasOne(i => i.Payment)
-                          .WithOne(p => p.Invoice)
-                          .HasForeignKey<Payment>(p => p.InvoiceId)
-                          .OnDelete(DeleteBehavior.Cascade);
-              });
+                        // One-to-Many: Invoice -> TimeBills
+                        entity.HasMany(i => i.TimeBills)
+                              .WithOne(tb => tb.Invoice)
+                              .HasForeignKey(tb => tb.InvoiceId)
+                              .OnDelete(DeleteBehavior.Cascade);
 
-              // -------------------------
-              // InvoiceLine
-              // -------------------------
-              modelBuilder.Entity<InvoiceLine>(entity =>
-              {
-                    entity.ToTable("InvoiceLines");
+                        // One-to-One: Invoice -> Payment
+                        entity.HasOne(i => i.Payment)
+                              .WithOne(p => p.Invoice)
+                              .HasForeignKey<Payment>(p => p.InvoiceId)
+                              .OnDelete(DeleteBehavior.Cascade);
+                  });
 
-                    entity.HasKey(l => l.Id);
+                  // -------------------------
+                  // InvoiceLine
+                  // -------------------------
+                  modelBuilder.Entity<InvoiceLine>(entity =>
+                  {
+                        entity.ToTable("InvoiceLines");
 
-                    entity.Property(l => l.Description)
-                          .IsRequired()
-                          .HasMaxLength(200);
+                        entity.HasKey(l => l.Id);
 
-                    entity.Property(l => l.Quantity)
-                          .IsRequired();
+                        entity.Property(l => l.Description)
+                              .IsRequired()
+                              .HasMaxLength(200);
 
-                    entity.Property(l => l.UnitPrice)
-                          .HasColumnType("decimal(18,2)");
-              });
+                        entity.Property(l => l.Quantity)
+                              .IsRequired();
 
-              // -------------------------
-              // TimeBill
-              // -------------------------
-              modelBuilder.Entity<TimeBill>(entity =>
-              {
-                    entity.ToTable("TimeBills");
+                        entity.Property(l => l.UnitPrice)
+                              .HasColumnType("decimal(18,2)");
+                  });
 
-                    entity.HasKey(tb => tb.Id);
+                  // -------------------------
+                  // TimeBill
+                  // -------------------------
+                  modelBuilder.Entity<TimeBill>(entity =>
+                  {
+                        entity.ToTable("TimeBills");
 
-                    entity.Property(tb => tb.WorkDate)
-                          .IsRequired();
+                        entity.HasKey(tb => tb.Id);
 
-                    entity.Property(tb => tb.Hours)
-                          .HasColumnType("decimal(5,2)");
+                        entity.Property(tb => tb.WorkDate)
+                              .IsRequired();
 
-                    entity.Property(tb => tb.RatePerHour)
-                          .HasColumnType("decimal(18,2)");
-              });
+                        entity.Property(tb => tb.Hours)
+                              .HasColumnType("decimal(5,2)");
 
-              // -------------------------
-              // Payment
-              // -------------------------
-              modelBuilder.Entity<Payment>(entity =>
-              {
-                    entity.ToTable("Payments");
+                        entity.Property(tb => tb.RatePerHour)
+                              .HasColumnType("decimal(18,2)");
+                  });
 
-                    entity.HasKey(p => p.Id);
+                  // -------------------------
+                  // Payment
+                  // -------------------------
+                  modelBuilder.Entity<Payment>(entity =>
+                  {
+                        entity.ToTable("Payments");
 
-                    entity.Property(p => p.PaymentDate)
-                          .IsRequired();
+                        entity.HasKey(p => p.Id);
 
-                    entity.Property(p => p.Amount)
-                          .HasColumnType("decimal(18,2)");
+                        entity.Property(p => p.PaymentDate)
+                              .IsRequired();
 
-                    entity.Property(p => p.Method)
-                          .HasMaxLength(50);
-              });
-        }
+                        entity.Property(p => p.Amount)
+                              .HasColumnType("decimal(18,2)");
+
+                        entity.Property(p => p.Method)
+                              .HasMaxLength(50);
+                  });
+            }
 
 
-        public new DbSet<T> Set<T>() where T : class, IRootEntity
-        {
-            return base.Set<T>();
-        }
+            public new DbSet<T> Set<T>() where T : class, IRootEntity
+            {
+                  return base.Set<T>();
+            }
 
-        public DbConnection GetDbConnection()
-        {
-            return this.Database.GetDbConnection(); 
-        }
+            public DbConnection GetDbConnection()
+            {
+                  // return this.Database.GetDbConnection();
+                  return new MySqlConnector.MySqlConnection(this.Database.GetConnectionString());
+            }
 
-        public string ConnectionString { get; set; }
-        public EntityEntry<T> EntryVal<T>(T entityEntryEntity) where T : class, IRootEntity
-        {
-              return this.Entry(entityEntryEntity);
-        }
-    }
+            // public DatabaseFacade DB => this.Database;
+
+            public string ConnectionString { get; set; }
+            // public EntityEntry<T> EntryVal<T>(T entityEntryEntity) where T : class, IRootEntity
+            // {
+            //       return this.Entry(entityEntryEntity);
+            // }
+      }
 }

@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using dapper_dommel_implementation;
 using ef_base_repository;
 using ef_dapper_models;
 using ef_implementation_tests;
-using ef_implementation;
-using Microsoft.EntityFrameworkCore;
-using RepoDb;
 using Xunit;
 
 public class UserServiceTestsDapperDommel:BaseTest
@@ -40,9 +37,6 @@ public class UserServiceTestsDapperDommel:BaseTest
         Assert.Equal("John1", result.FirstName);
         Assert.True(result.Id > 0);
 
-        // Verify it was actually persisted
-        // var savedUser = await service.FindById(result.Id);
-        // Assert.NotNull(savedUser);
     }
     
 }

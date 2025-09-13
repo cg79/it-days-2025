@@ -1,6 +1,9 @@
 
+using dapper_implementation;
+using dapper_simple_crud_implementation;
 using ef_base_repository;
 using ef_implementation;
+using linq_to_db_implementation;
 
 namespace ef_dapper
 {
@@ -27,9 +30,9 @@ namespace ef_dapper
             services.AddScoped<UserService_Dapper>();
             services.AddScoped<UserService_SimpleCrud>();
             services.AddScoped<UserService_LinqToDb>();
-            services.AddScoped<IUserServiceFactory, UserServiceFactory>();
+            // services.AddScoped<IUserServiceFactory, UserServiceFactory>();
             
-            services.AddScoped<IUserServiceLinqToDb, UserService_LinqToDb>();
+            // services.AddScoped<IUserServiceLinqToDb, UserService_LinqToDb>();
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IUserCredentialsRepository, UserCredentialsRepository>();
             return services;

@@ -19,7 +19,7 @@ public class BaseTest
         var options = new DbContextOptionsBuilder<DataContext>()
             .UseMySql(connectionString, new MySqlServerVersion(new Version(8, 3, 0)))
             .LogTo(Console.WriteLine, LogLevel.Information) // logs SQL
-            .EnableSensitiveDataLogging() 
+            // .EnableSensitiveDataLogging() 
             .Options;
 
         var context = new DataContext(options);

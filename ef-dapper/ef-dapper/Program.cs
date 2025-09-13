@@ -11,11 +11,15 @@ namespace ef_dapper
             var app = CreateHostBuilder(args).Build();
             using (var scope = app.Services.CreateScope())
             {
-                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-                db.Database.EnsureCreated();
-                
-                await DataSeeder.SeedAsync(db, 10_000);
-                app.Run();
+                var seed = false;
+                if (seed)
+                {
+                    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+                    db.Database.EnsureCreated();
+
+                    await DataSeeder.SeedAsync(db, 10_000);
+                    db.Database.Migrate();
+                }
             } 
             app.Run();
         }

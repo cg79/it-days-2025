@@ -11,43 +11,45 @@ namespace ef_dapper;
 public class UserController: ControllerBase
 {
 
-    private readonly IUserServiceFactory _factory;
+    // private readonly IUserServiceFactory _factory;
 
-    public UserController(IUserServiceFactory factory)
-    {
-        _factory = factory;
-    }
+    // public UserController(IUserServiceFactory factory)
+    // {
+    //     _factory = factory;
+    // }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> CreateUserEF([FromBody] User command)
     {
+        return Ok(1);
         // Debugger.Break();
-        try
-        {
-            var _userService = _factory.GetService(UserServiceType.EF);
-            var resp = await _userService.Insert(command);
-            return Ok(resp);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        // try
+        // {
+        //     var _userService = _factory.GetService(UserServiceType.EF);
+        //     var resp = await _userService.Insert(command);
+        //     return Ok(resp);
+        // }
+        // catch (Exception ex)
+        // {
+        //     return BadRequest(ex.Message);
+        // }
     }
     
     [HttpPost("[action]")]
     public async Task<IActionResult> CreateUserDapper([FromBody] User command)
     {
-        var _userService = _factory.GetService(UserServiceType.Dapper);
-        var resp = await _userService.Insert(command);
-        return Ok(resp);
+        return Ok(1);
+        // var _userService = _factory.GetService(UserServiceType.Dapper);
+        // var resp = await _userService.Insert(command);
+        // return Ok(resp);
     }
     
     [HttpPost("[action]")]
     public async Task<IActionResult> CreateUserDapper_simplecrud([FromBody] User command)
     {
-        var _userService = _factory.GetService(UserServiceType.SimpleCrud);
-        var resp = await _userService.Insert(command);
-        return Ok(resp);
+        // var _userService = _factory.GetService(UserServiceType.SimpleCrud);
+        // var resp = await _userService.Insert(command);
+        return Ok(1);
     }
     
     // [HttpPost("[action]")]

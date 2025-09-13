@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ef_dapper_models;
 
+
+[System.ComponentModel.DataAnnotations.Schema.Table("Invoices")]
 public class Invoice : IRootEntity
 {
     [Key]

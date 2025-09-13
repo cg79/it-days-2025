@@ -6,8 +6,8 @@ namespace ef_base_repository;
 
 public interface IGenericRepository<T> where T : IRootEntity
 {
-    Task<T?> GetByIdAsync(int id);
-    Task DeleteByIdAsync(int id);
+    Task<T?> FindByIdAsync(long id);
+    Task DeleteByIdAsync(long id);
     Task<PaginationResponse<T>> GetPagedAsync(
         PaginationRequest paginationRequest,
         CancellationToken cancellationToken = default);

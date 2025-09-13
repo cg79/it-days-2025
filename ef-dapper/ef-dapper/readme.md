@@ -1,12 +1,31 @@
 -- docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=RootPass123 -e MYSQL_DATABASE=MyAppDb -p 3306:3306 -d mysql:8.3
 
 # docker my-sql image
+```
 docker run --name mysql-db \
 -e MYSQL_ROOT_PASSWORD=RootPass123 \
 -e MYSQL_DATABASE=MyAppDb \
 -e MYSQL_USER=appuser \
 -e MYSQL_PASSWORD=AppPass123 \
 -p 3306:3306 -d mysql:8.3
+```
+
+# postgress
+```aiignore
+docker run -d \
+  --name pgvector-db \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=embeddingsdb \
+  -p 5433:5432 \
+  ankane/pgvector
+```
+
+# redis
+```
+docker run -d --name my-redis -p 6379:6379 redis
+```
+
 
 https://www.youtube.com/watch?v=W5BxH9CdcsY&t=626s
 
@@ -37,6 +56,8 @@ public static void Main(string[] args)
  - run from the benchmarks directory
 ```aiignore
 dotnet run -c Release
+or
+dotnet run -c Release -- --diagnosers *
 ```
 
 # functionalities 
@@ -181,3 +202,22 @@ For CRUD helpers: Dapper.SimpleCRUD, Dapper.Contrib, Dapper.Rainbow
 For LINQ-like queries: Dommel, linq2db
 
 For high-performance ORM: RepoDb
+
+SELECT u.*
+  FROM `Users` AS `u`
+  LEFT JOIN (
+      SELECT `i`.`InvoiceDate`, `i`.`UserId`
+      FROM `Invoices` AS `i`
+      WHERE `i`.`Status` = 'Paid'
+  ) AS `i0` ON `u`.`Id` = `i0`.`UserId`
+  WHERE `u`.`Id` = 6
+
+
+practices
+    - start with unit test
+    - EF should return IQuerable
+
+- use CancellationToken
+- when updating, do not update all fields
+- when a connection should be closed
+    - how i can reuse the connection

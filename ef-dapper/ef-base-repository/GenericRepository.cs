@@ -1,4 +1,6 @@
 ﻿
+using System.Data;
+using System.Linq.Expressions;
 using ef_dapper_models;
 using Efcom.Base.Repository.Request;
 using Microsoft.EntityFrameworkCore;
@@ -18,21 +20,23 @@ public  class GenericRepository<T>(IEFDataContext context) : BaseRepository<T>(c
         return source;
     }
     
-    public IQueryable<T> Find(QueryFilter filter)
+    public IQueryable<T> FindQueryFilter(QueryFilter filter)
     {
         var predicate = filter.ToExpression<T>();
-        var source = _context.Set<T>().Where(predicate);
-        return source;
+        return _context.Set<T>().Where(predicate);
+    }
+    public IQueryable<T>  FindLinq( Expression<Func<T,bool>> whereExpression)
+    {
+        return _context.Set<T>().Where(whereExpression);
     }
     
     
-    public Task<List<T>> Filter(FilterGroup filterGroup)
+    public IQueryable<T> Filter(FilterGroup filterGroup)
     {
         string filterExpression = FilterParser.Parse(filterGroup);
         var whereExpression = GenericExpression.CreateFilterExpression<T>(filterExpression);
-        var source = _context.Set<T>()
-            .Where(whereExpression).ToListAsync();
-        return source;
+        return _context.Set<T>()
+            .Where(whereExpression);
     }
     public async Task<PaginationResponse<T>> GetPagedAsync(
         PaginationRequest paginationRequest,

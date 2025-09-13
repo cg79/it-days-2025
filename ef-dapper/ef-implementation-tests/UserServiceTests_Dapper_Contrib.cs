@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using dapper_contrib_implementation;
 using ef_base_repository;
 using ef_dapper_models;
 using ef_implementation_tests;
@@ -22,13 +23,13 @@ public class UserServiceTestsDapperContrib:BaseTest
         // Arrange
         var service = new UserService_DapperContrib(DbContext);
 
-        var user = new User
+        var user = new UserDapperContrib
         {
             FirstName = "John1",
             Email = "test@example.com",
-            Guid = "test",
-            LastName = "Test",
-            PhoneNumber = "074291773"
+            // Guid = "test",
+            // LastName = "Test",
+            // PhoneNumber = "074291773"
         };
 
         // Act

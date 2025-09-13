@@ -9,31 +9,19 @@ public class InvoiceRepository(IEFDataContext context) : GenericRepository<Invoi
 {
     public async Task<List<Invoice>> GetInvoicesAsync(QueryFilter group)
     {
-        try
-        {
-            var query = Find(group)
-                .AsNoTracking()               // optional: no tracking for read-only
-                .Include(i => i.Payment)      // include associated payment
-                .Include(i => i.InvoiceLines) // include invoice lines
-                .Include(i => i.TimeBills);   // include time bills
+            var query = FindQueryFilter(group)
+                .AsNoTracking()               
+                .Include(i => i.Payment)      
+                .Include(i => i.InvoiceLines) 
+                .Include(i => i.TimeBills);   
 
             return await query.ToListAsync(); // async version
-        }
-        catch (Exception ex)
-        {
-            throw; // no need to "throw ex" (preserves stack trace)
-        }
     }
     
     public async Task<List<Invoice>> GetInvoicesAsyncMultipleQueries(QueryFilter group)
     {
-        try
-        {
-            var invoices = await Find(group)
+            var invoices = await FindQueryFilter(group)
                 .AsNoTracking().ToListAsync();               
-                // .Include(i => i.Payment)      // include associated payment
-                // .Include(i => i.InvoiceLines) // include invoice lines
-                // .Include(i => i.TimeBills);   // include time bills
     
            var invoiceIds = invoices.Select(i => i.Id).ToList();
            var payments = await _context.Set<Payment>()
@@ -60,11 +48,6 @@ public class InvoiceRepository(IEFDataContext context) : GenericRepository<Invoi
            }
 
            return invoices;
-            // return await invoices.ToListAsync(); // async version
-        }
-        catch (Exception ex)
-        {
-            throw; // no need to "throw ex" (preserves stack trace)
-        }
+        
     }
 }

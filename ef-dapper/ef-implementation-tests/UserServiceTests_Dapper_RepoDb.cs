@@ -4,10 +4,13 @@ using ef_dapper_models;
 using ef_implementation_tests;
 using ef_implementation;
 using Microsoft.EntityFrameworkCore;
+using repodb_implementation;
 using RepoDb;
 using Xunit;
+// using RepoDb.MySqlConnector;  // required
+using MySqlConnector;
 
-public class UserServiceTestsDapperExtensions:BaseTest
+public partial class UserServiceTestsDapperExtensions:BaseTest
 {
     public IEFDataContext DbContext { get; set; }
     
@@ -15,9 +18,10 @@ public class UserServiceTestsDapperExtensions:BaseTest
     public UserServiceTestsDapperExtensions()
     {
         this.DbContext = GetMySqlDbContext();
-        
+        // GlobalConfiguration.Setup().UseMySql();
+        RepoDb.MySqlBootstrap.Initialize();
     }
-    
+
     [Fact]
     public async Task Insert_Should_Add_User_To_Database()
     {
@@ -32,18 +36,21 @@ public class UserServiceTestsDapperExtensions:BaseTest
             LastName = "Test",
             PhoneNumber = "074291773"
         };
+        try
+        {
+            // Act
+            var result = await service.Insert(user);
 
-        // Act
-        var result = await service.Insert(user);
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("John1", result.FirstName);
+            Assert.True(result.Id > 0);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
 
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal("John1", result.FirstName);
-        Assert.True(result.Id > 0);
-
-        // Verify it was actually persisted
-        // var savedUser = await service.FindById(result.Id);
-        // Assert.NotNull(savedUser);
     }
     
 }

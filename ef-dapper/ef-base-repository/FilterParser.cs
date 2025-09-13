@@ -81,8 +81,8 @@ public enum FilterOperator
 
 public class FilterGroup
 {
-    public string Logic { get; set; } = "and"; // "and" or "or"
-    public List<object> Filters { get; set; } = new(); // can hold FilterCondition or FilterGroup
+    public string Logic { get; set; } = "and"; 
+    public List<object> Filters { get; set; } = new(); 
 }
 
 public class FilterCondition

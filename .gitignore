@@ -2,5 +2,7 @@ bin
 obj
 node_modules
 BenchmarkDotNet.Artifacts
+Key.txt
+.vs
 
 

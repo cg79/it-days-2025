@@ -18,6 +18,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef-implementation-benchmark
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef-gpt", "ef-gpt\ef-gpt.csproj", "{BDB098B3-1760-4114-8336-3BD17F7B4CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "repodb-implementation", "repodb-implementation\repodb-implementation.csproj", "{F13C2CD8-1FCE-490C-9278-D72C183E0B57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dapper-contrib-implementation", "dapper-contrib-implementation\dapper-contrib-implementation.csproj", "{01F17296-AE33-458F-95B3-4A9F7B6EAF2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "linq-to-db-implementation", "linq-to-db-implementation\linq-to-db-implementation.csproj", "{22E4AEC6-0A40-49F2-92D0-AEC00A79EA1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dapper-dommel-implementation", "dapper-dommel-implementation\dapper-dommel-implementation.csproj", "{553C3683-1CD9-47BC-AC84-8480F900E5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dapper-simple-crud-implementation", "dapper-simple-crud-implementation\dapper-simple-crud-implementation.csproj", "{84BC7510-A28D-4B6C-9DCB-C36B100F5A2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef.Cryptography", "ef.Cryptography\ef.Cryptography.csproj", "{A1A9993A-2DF3-4D58-B0EB-171CC6E37BAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef-cache", "ef-cache\ef-cache.csproj", "{2647088A-FB6D-4A73-BE26-4E58455CC3F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +74,33 @@ Global
 		{BDB098B3-1760-4114-8336-3BD17F7B4CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB098B3-1760-4114-8336-3BD17F7B4CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB098B3-1760-4114-8336-3BD17F7B4CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F13C2CD8-1FCE-490C-9278-D72C183E0B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F13C2CD8-1FCE-490C-9278-D72C183E0B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F13C2CD8-1FCE-490C-9278-D72C183E0B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F13C2CD8-1FCE-490C-9278-D72C183E0B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01F17296-AE33-458F-95B3-4A9F7B6EAF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01F17296-AE33-458F-95B3-4A9F7B6EAF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01F17296-AE33-458F-95B3-4A9F7B6EAF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01F17296-AE33-458F-95B3-4A9F7B6EAF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E4AEC6-0A40-49F2-92D0-AEC00A79EA1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E4AEC6-0A40-49F2-92D0-AEC00A79EA1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E4AEC6-0A40-49F2-92D0-AEC00A79EA1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E4AEC6-0A40-49F2-92D0-AEC00A79EA1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553C3683-1CD9-47BC-AC84-8480F900E5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553C3683-1CD9-47BC-AC84-8480F900E5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553C3683-1CD9-47BC-AC84-8480F900E5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553C3683-1CD9-47BC-AC84-8480F900E5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BC7510-A28D-4B6C-9DCB-C36B100F5A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BC7510-A28D-4B6C-9DCB-C36B100F5A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BC7510-A28D-4B6C-9DCB-C36B100F5A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BC7510-A28D-4B6C-9DCB-C36B100F5A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A9993A-2DF3-4D58-B0EB-171CC6E37BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A9993A-2DF3-4D58-B0EB-171CC6E37BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A9993A-2DF3-4D58-B0EB-171CC6E37BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A9993A-2DF3-4D58-B0EB-171CC6E37BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
