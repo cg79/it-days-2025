@@ -28,6 +28,19 @@ public partial class UserService_Dapper
         return await db.ExecuteScalarAsync<long>(sql, parameters);
     }
 
+    public async Task<long> InsertWithSP(string email, string firstName)
+    {
+        await using var db = await GetOpenConnectionAsync();
+        
+        var newUser = await db.ExecuteScalarAsync<long>(
+            "InsertUser1",
+            new { p_FirstName = firstName, p_Email = email },
+            commandType: CommandType.StoredProcedure
+        );
+
+        return newUser;
+    }
+
    
 }
 

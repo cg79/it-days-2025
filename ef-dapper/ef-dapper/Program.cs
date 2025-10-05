@@ -1,5 +1,6 @@
 ﻿
 using ef_base_repository;
+using ef_dapper_CustomDataSeed;
 using Microsoft.EntityFrameworkCore;
 
 namespace ef_dapper
@@ -17,8 +18,13 @@ namespace ef_dapper
                     var db = scope.ServiceProvider.GetRequiredService<DataContext>();
                     db.Database.EnsureCreated();
 
-                    await DataSeeder.SeedAsync(db, 10_000);
-                    db.Database.Migrate();
+                    // await DataSeeder.SeedAsync(db, 10_000);
+                    // db.Database.Migrate();
+
+                    CustomDataSeed customDataSeed = new CustomDataSeed();
+                    
+                    string jsonConfig = File.ReadAllText("CustomDataSeed/seedConfig.json");
+                    await customDataSeed.SeedDatabaseAsync(db, jsonConfig);
                 }
             } 
             app.Run();

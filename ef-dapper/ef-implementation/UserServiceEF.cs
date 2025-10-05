@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using ef_base_repository;
 using ef_dapper_models;
+using Efcom.Base.Repository.Request;
 using LinqToDB;
 
 namespace ef_implementation;
@@ -98,5 +99,11 @@ public partial class UserServiceEF : GenericRepository<User>
         return response;
     }
 
+    public async Task<PaginationResponse<User>> PaginatedUsers(PaginationRequest request)
+    {
+        GenericRepository<User> userRepo = new GenericRepository<User>(_dataContext);
+        var response = await userRepo.GetPagedAsync(request);
+        return response;
+    }
 
 }

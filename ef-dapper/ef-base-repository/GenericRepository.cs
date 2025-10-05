@@ -1,5 +1,6 @@
 ﻿
 using System.Data;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using ef_dapper_models;
 using Efcom.Base.Repository.Request;
@@ -48,22 +49,20 @@ public  class GenericRepository<T>(IEFDataContext context) : BaseRepository<T>(c
         if (paginationRequest.FilterExpression != null)
         {
             var whereExpression = GenericExpression.CreateFilterExpression<T>(paginationRequest.FilterExpression);
-            source = source
-                   .Where(whereExpression);
+            source = source.Where(whereExpression); 
         }
         
         if (paginationRequest.FilterGroup != null)
         {
             var expression = FilterParser.Parse(paginationRequest.FilterGroup);
-            var whereExpression = GenericExpression.CreateFilterExpression<T>(paginationRequest.FilterExpression);
+            var whereExpression = GenericExpression.CreateFilterExpression<T>(expression);
             source = source
                 .Where(whereExpression);
         }
 
-        if (paginationRequest.SortBy != null)
+        if (paginationRequest.SortCriteria != null)
         {
-            var sortCriteria = JsonExtensions.FromJson<Dictionary<string, string>>(paginationRequest.SortBy);
-            source = GenericExpression.ApplySorting(source, sortCriteria);
+            source = GenericExpression.ApplySorting(source, paginationRequest.SortCriteria);
         }
 
         var records = await source

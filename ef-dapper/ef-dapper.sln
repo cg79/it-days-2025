@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef.Cryptography", "ef.Crypt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef-cache", "ef-cache\ef-cache.csproj", "{2647088A-FB6D-4A73-BE26-4E58455CC3F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ef-gpt-mcp", "ef-gpt-mcp\ef-gpt-mcp.csproj", "{974DE7CE-A56D-4655-A161-6804390C34A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,5 +104,9 @@ Global
 		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2647088A-FB6D-4A73-BE26-4E58455CC3F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{974DE7CE-A56D-4655-A161-6804390C34A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974DE7CE-A56D-4655-A161-6804390C34A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974DE7CE-A56D-4655-A161-6804390C34A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974DE7CE-A56D-4655-A161-6804390C34A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

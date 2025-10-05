@@ -15,8 +15,9 @@ class Program
         // BenchmarkRunner.Run<UserBenchmarksUpdateByIdEF>();
         // BenchmarkRunner.Run<UserBenchmarksUpdateByIdDapper>();
         //
-        BenchmarkRunner.Run<UserBenchmarksFind>();
+        // BenchmarkRunner.Run<UserBenchmarksFind>();
         // BenchmarkRunner.Run<UserBenchmarksFindMT>();
+        BenchmarkRunner.Run<UserBenchmarksInsertSP>();
     }
     
     // public static async Task Main(string[] args)

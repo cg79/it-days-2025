@@ -11,7 +11,7 @@ public abstract class GenericExpression
         return DynamicExpressionParser.ParseLambda<T, bool>(new ParsingConfig(), false, filter);
     }
 
-    public static IQueryable<T> ApplySorting<T>(IQueryable<T> source, Dictionary<string, string> sortCriteria)
+    public static IQueryable<T> ApplySorting<T>(IQueryable<T> source, Dictionary<string, bool>? sortCriteria)
     {
         if (sortCriteria == null || !sortCriteria.Any())
         {
@@ -19,7 +19,7 @@ public abstract class GenericExpression
         }
 
         var orderByString = string.Join(", ",
-            sortCriteria.Select(kvp => $"{kvp.Key} {kvp.Value}"));
+            sortCriteria.Select(kvp => $"{kvp.Key} {(kvp.Value ? "desc" : "asc")}"));
 
         return source.OrderBy(orderByString);
     }

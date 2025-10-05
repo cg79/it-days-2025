@@ -41,6 +41,26 @@ public partial class UserServiceTestsDapper: BaseTest
     }
     
     [Fact]
+    public async Task Insert_WITHSPShould_Add_User_To_Database()
+    {
+        // Arrange
+        var service = new UserService_Dapper(this.DbContext);
+
+        var user = new User
+        {
+            FirstName = "John",
+            Email = "test@example.com"
+        };
+
+        // Act
+        var result = await service.InsertWithSP("claudiu9379@yahoo.com", "and");
+
+        // Assert
+        Assert.True(result>0);
+
+    }
+    
+    [Fact]
     public async Task Insert_Should_Add_User_To_Database_Dapper()
     {
         // Arrange

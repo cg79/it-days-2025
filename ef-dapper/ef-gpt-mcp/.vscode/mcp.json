@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "my-mcp-server-93718592": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["run", "--project", "ef-gpt-mcp.csproj"]
+    }
+  }
+}
