@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>ef_implementation_benchmarks</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+      <PackageReference Include="Bogus" Version="35.6.3" />
+      <PackageReference Include="Dapper" Version="2.1.66" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+      <PackageReference Include="MySql.Data" Version="9.4.0" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\dapper-implementation\dapper-implementation.csproj" />
+      <ProjectReference Include="..\dapper-simple-crud-implementation\dapper-simple-crud-implementation.csproj" />
+      <ProjectReference Include="..\ef-implementation-tests\ef-implementation-tests.csproj" />
+      <ProjectReference Include="..\ef-implementation\ef-implementation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="BenchmarkRunnerTests.cs" />
+    </ItemGroup>
+
+</Project>

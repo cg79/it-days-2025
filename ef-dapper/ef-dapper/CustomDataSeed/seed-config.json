@@ -1,0 +1,22 @@
+
+[
+  {
+  tableName: "Invoices",
+  records: 1,
+  columnValues: {
+    userId: {
+      value:{
+        type: "table",
+        column: "Users.Id"
+      }
+    },
+    amount:{
+      value: {
+        type: "random",
+          min: 0,
+          max: 1000
+      }
+    }
+  }
+}
+]

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>dapper_dommel_implementation</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ef-base-repository\ef-base-repository.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dommel" Version="3.4.0" />
+    </ItemGroup>
+
+</Project>

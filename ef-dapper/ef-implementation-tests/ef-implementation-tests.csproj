@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>ef_implementation_tests</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\dapper-contrib-implementation\dapper-contrib-implementation.csproj" />
+      <ProjectReference Include="..\dapper-dommel-implementation\dapper-dommel-implementation.csproj" />
+      <ProjectReference Include="..\dapper-implementation\dapper-implementation.csproj" />
+      <ProjectReference Include="..\dapper-simple-crud-implementation\dapper-simple-crud-implementation.csproj" />
+      <ProjectReference Include="..\ef-base-repository\ef-base-repository.csproj" />
+      <ProjectReference Include="..\ef-implementation\ef-implementation.csproj" />
+      <ProjectReference Include="..\linq-to-db-implementation\linq-to-db-implementation.csproj" />
+      <ProjectReference Include="..\repodb-implementation\repodb-implementation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.8" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.8" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.8" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+      <PackageReference Include="RepoDb.MySql" Version="1.13.1" />
+      <PackageReference Include="RepoDb.MySqlConnector" Version="1.13.1" />
+      <PackageReference Include="xunit" Version="2.9.3" />
+      <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="appsettings.Development.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    
+
+</Project>

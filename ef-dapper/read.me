@@ -1,0 +1,1 @@
+using (var scope = app.Services.CreateScope()) { var db = scope.ServiceProvider.GetRequiredService<AppDbContext>(); db.Database.EnsureCreated(); // creates schema if not exists // db.Database.Migrate(); // safer: applies pending migrations }
