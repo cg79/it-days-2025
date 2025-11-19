@@ -12,7 +12,7 @@ namespace ef_dapper
             var app = CreateHostBuilder(args).Build();
             using (var scope = app.Services.CreateScope())
             {
-                var seed = false;
+                var seed = true;
                 if (seed)
                 {
                     var db = scope.ServiceProvider.GetRequiredService<DataContext>();
@@ -24,8 +24,8 @@ namespace ef_dapper
                     // await DataSeederProducts.SeedProductsAsync(db, 1000000);
 
                     CustomDataSeed customDataSeed = new CustomDataSeed();
-                    string jsonConfig = File.ReadAllText("CustomDataSeed/seedConfig.json");
-                    await customDataSeed.SeedDatabaseAsync(db, jsonConfig);
+                    string jsonConfig = File.ReadAllText("CustomDataSeed/seed-config.json");
+                    await customDataSeed.RunAsync(db, "CustomDataSeed/seed-config.json");
                 }
             } 
             app.Run();

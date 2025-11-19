@@ -2,21 +2,17 @@ namespace ef_dapper_CustomDataSeed;
 
 public class SeedConfig
 {
-    public string TableName { get; set; }
-    public int Records { get; set; }
-    public Dictionary<string, ColumnConfig> ColumnValues { get; set; }
+    public string table { get; set; }
+    public int count { get; set; }
+    public Dictionary<string, FieldRule>? fields { get; set; }
 }
 
-public class ColumnConfig
+public class FieldRule
 {
-    public ColumnValue Value { get; set; }
-}
-
-public class ColumnValue
-{
-    public string Type { get; set; }           // "random", "table", "fixed"
-    public string Column { get; set; }        // for table lookup
-    public object FixedValue { get; set; }    // for fixed value
-    public double? Min { get; set; }          // for random
-    public double? Max { get; set; }          // for random
+    public string? type { get; set; }          // faker | range | lookup
+    public string method { get; set; }        // Name.FirstName, Internet.Email, ...
+    public int min { get; set; }
+    public int max { get; set; }
+    public string table { get; set; }         // lookup table
+    public string field { get; set; }         // lookup field
 }

@@ -1,22 +1,16 @@
-
 [
   {
-  tableName: "Invoices",
-  records: 1,
-  columnValues: {
-    userId: {
-      value:{
-        type: "table",
-        column: "Users.Id"
-      }
-    },
-    amount:{
-      value: {
-        type: "random",
-          min: 0,
-          max: 1000
-      }
-    }
+    "table": "Users",
+    "count": 50
+  },
+  {
+  "table": "Invoices",
+  "count": 50,
+  "fields": {
+    "InvoiceDate": {  "method": "datebetween:2020/1/1:2026/1/1" },
+    "Status":  { "type": "faker", "method": "name" },
+    "TotalAmount":        { "type": "range", "min": 18, "max": 70 },
+    "UserId": { "type": "lookup", "table": "Users", "field": "id" }
   }
 }
 ]

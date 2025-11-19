@@ -1,4 +1,5 @@
-﻿using System.Linq.Dynamic.Core;
+﻿using System.Dynamic;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Dapper;
@@ -164,6 +165,39 @@ public abstract class GenericExpression
         {
             parameters.Add("@" + p.Name, p.GetValue(entity));
         }
+        return (sql, parameters);
+    }
+
+    public static (string Sql, object Parameters) CreateInsertQueryFromExpando(object entity, string tableName, string keyName = "Id")
+    {
+        IDictionary<string, object> propsDict;
+
+        if (entity is ExpandoObject expando)
+        {
+            propsDict = (IDictionary<string, object>)expando;
+        }
+        else
+        {
+            propsDict = entity.GetType()
+                .GetProperties()
+                .Where(p => p.CanRead && p.Name != keyName)
+                .ToDictionary(p => p.Name, p => p.GetValue(entity));
+        }
+
+        if (!propsDict.Any())
+            throw new ArgumentException($"No insertable properties found on type '{entity.GetType().Name}'");
+
+        var columns = string.Join(", ", propsDict.Keys);
+        var paramNames = string.Join(", ", propsDict.Keys.Select(k => "@" + k));
+
+        var sql = $"INSERT INTO {tableName} ({columns}) VALUES ({paramNames}); SELECT LAST_INSERT_ID();";
+
+        var parameters = new DynamicParameters();
+        foreach (var kvp in propsDict)
+        {
+            parameters.Add("@" + kvp.Key, kvp.Value);
+        }
+
         return (sql, parameters);
     }
 
